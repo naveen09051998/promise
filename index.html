@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    <script >
+    
+    //in javascript promise only one should be printed means either resove or reject based on the condition.
+//resolve -> then() , reject -> catch()
+/*var a =4;
+var p = new Promise(function(resolve,reject) {
+    //a=a+3;
+    if(a>5){
+       resolve(a);
+    }
+    else{
+        reject('value is not correct');
+    }
+});
+ //console.log(p);
+
+p.then(function (data){
+      console.log(data);
+}).catch(function(error){
+    console.log(error);
+})*/
+
+/*var p1 = new Promise(function(resolve,reject){
+
+    if(true){
+        setTimeout(() => {
+            resolve("promise 1 resolved")
+        }, 2000);
+    }else{
+        setTimeout(() => {
+            reject("promise 1 rejected");
+        }, 4000);
+    }
+});
+
+var p2 = new Promise(function(resolve,reject){
+
+    if(true){
+        setTimeout(() => {
+            resolve("promise 2 resolved")
+        }, 1000);
+    }else{
+        setTimeout(() => {
+            reject("promise 2 rejected");
+        }, 4000);
+    }
+});
+
+var p3 = new Promise(function(resolve,reject){
+
+    if(false){
+        setTimeout(() => {
+            resolve("promise 3 resolved")
+        }, 300);
+    }else{
+        setTimeout(() => {
+            reject("promise 3 rejected");
+        }, 4000);
+    }
+});
+
+Promise.all([p1,p2,p3])
+.then(function(data){
+    console.log(data);
+}).catch(function(error){
+    console.log(error);
+})*/
+
+
+/*var a =4;
+var p1 = new Promise(function(resolve,reject) {
+    a=a+3;
+    if(a>5){
+       resolve(a);
+    }
+    else{
+        reject('value is not correct');
+    }
+});
+
+p1.then(function(data){
+    console.log(data);
+    return data + 2;
+})
+.then(function(data1){
+    console.log(data1);
+    if(data1 ==9){
+        throw "the value is 9";//using throw it skips the remaining lines in the program.
+    }
+    else{
+        return data1 + 3;
+    }
+})
+
+.then(function(data2){
+    console.log(data2);
+}).catch(function(error){
+    console.log(error);
+})*/
+
+/*fetch('https://restcountries.eu/rest/v2/all')
+.then(function(resp){
+      //console.log(resp);=>convert readable stream in body to json  using json method.
+      return resp.json(); // by using return we can another then method.
+})
+.then(function(result){
+    console.log(result);
+})
+.catch(function(error){
+  console.log(error);
+})*/
+
+/*fetch('https://raw.githubusercontent.com/Rajavasanthan/jsondata/master/pagenation.json')
+.then(function(resp){
+      //console.log(resp);=>convert readable stream in body to json  using json method.
+      return resp.json(); // by using return we can another then method.
+})
+.then(function(result){
+   // console.log(result);
+    //var data = result[0].email;
+    //console.log(data);
+    let f= result.filter(function(ele){
+        return ele.id > 90;
+    })
+    console.log(f);
+
+    let m = f.map(function(ele){
+        return ele.name;
+    })
+    console.log(m);
+})
+.catch(function(error){
+  console.log(error);
+})*/
+
+fetch('http://api.weatherstack.com/current?access_key=07b9c0be6be7c7899cf75625445510dc&query=New York')
+.then(function(resp){
+      //console.log(resp);=>convert readable stream in body to json  using json method.
+      return resp.json(); // by using return we can another then method.
+})
+.then(function(result){
+    //console.log(result);
+    var data = result.current.observation_time;
+    var data1 = result.location.country;
+    console.log(data1);
+    console.log(data);
+    document.querySelector('div1').innerHTML=data1;
+    document.querySelector('div').innerHTML=data;
+})
+.catch(function(error){
+  console.log(error);
+})
+
+
+
+    </script>
+</body>
+<div1 style="color:blue;text-align: center; font-size: 100px;padding-top: 150px;margin-left: 250px;"></div1>
+<div style="color: red; text-align: center; font-size: 100px;vertical-align: middle;padding-top: 200px;"></div>
+</html>
